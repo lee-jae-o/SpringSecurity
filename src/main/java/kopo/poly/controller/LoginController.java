@@ -69,9 +69,7 @@ public class LoginController {
 
     }
 
-    /**
-     * 로그인 정보 가져오기
-     */
+
     @PostMapping(value = "loginInfo")
     public ResponseEntity<CommonResponse> loginInfo(HttpSession session) {
 
