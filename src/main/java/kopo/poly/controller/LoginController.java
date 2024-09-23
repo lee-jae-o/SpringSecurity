@@ -29,7 +29,6 @@ public class LoginController {
 
         log.info(this.getClass().getName() + ".loginSuccess Start!");
 
-        // Spring Security에 저장된 정보 가져오기
         UserInfoDTO rDTO = Optional.ofNullable(authInfo.getUserInfoDTO()).orElseGet(() -> UserInfoDTO.builder().build());
 
         String userId = CmmUtil.nvl(rDTO.userId());
@@ -44,7 +43,6 @@ public class LoginController {
         session.setAttribute("SS_USER_NAME", userName);
         session.setAttribute("SS_USER_ROLE", userRoles);
 
-        // 결과 메시지 전달하기
         MsgDTO dto = MsgDTO.builder().result(1).msg(userName + "님 로그인이 성공하였습니다.").build();
 
         log.info(this.getClass().getName() + ".loginSuccess End!");
@@ -59,7 +57,6 @@ public class LoginController {
 
         log.info(this.getClass().getName() + ".loginFail Start!");
 
-        // 결과 메시지 전달하기
         MsgDTO dto = MsgDTO.builder().result(1).msg("로그인이 실패하였습니다.").build();
 
         log.info(this.getClass().getName() + ".loginFail End!");
@@ -75,12 +72,10 @@ public class LoginController {
 
         log.info(this.getClass().getName() + ".loginInfo Start!");
 
-        // Session 저장된 로그인한 회원 정보 가져오기
         String userId = CmmUtil.nvl((String) session.getAttribute("SS_USER_ID"));
         String userName = CmmUtil.nvl((String) session.getAttribute("SS_USER_NAME"));
         String roles = CmmUtil.nvl((String) session.getAttribute("SS_USER_ROLE"));
 
-        // 세션 값 전달할 데이터 구조 만들기
         UserInfoDTO dto = UserInfoDTO.builder().userId(userId).userName(userName).roles(roles).build();
 
         log.info(this.getClass().getName() + ".loginInfo End!");
